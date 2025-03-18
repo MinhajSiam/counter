@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tasbih - Online Tally Counter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="The fastest way to count prayers. No downloads. No fuss. Begin counting now. Remembers your counting even after you leave; simply return to pick up where you left. Edit the starting tally or adjust the increment value." />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta property="og:title" content="Tasbih - Online Tally Counter" />
+    <meta property="og:image" content="https://i.ibb.co/qYdbWDj/tasbih-social-thumbnail.png" />
+    <meta property="og:description" content="The fastest way to count prayers. No downloads. No fuss. Begin counting now. Remembers your counting even after you leave; simply return to pick up where you left. Edit the starting tally or adjust the increment value." />
+    <meta property="og:url" content="Tasbih.org" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+    <meta property="og:type" content="website" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#01301c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C7DZR2NL4L"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-C7DZR2NL4L");
+    </script>
+
+    <!-- Fonts and Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet" />
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Body Styling */
+      body {
+        font-family: 'Heebo', sans-serif;
+        background: #e0e5ec;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        color: #333;
+        flex-direction: column;
+      }
+
+      /* App Body Container */
+      .app-body {
+        background: #e0e5ec;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 10px 10px 20px #a3b1c6, -10px -10px 20px #ffffff;
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      /* Header Styling */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .header-element {
+        background: #e0e5ec;
+        border-radius: 15px;
+        padding: 10px 15px;
+        box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .header-element:hover {
+        box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+      }
+
+      /* Select Dropdown Styling */
+      .select {
+        border: none;
+        background: #e0e5ec;
+        border-radius: 15px;
+        padding: 10px;
+        box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        font-family: 'Heebo', sans-serif;
+        color: #333;
+        outline: none;
+        cursor: pointer;
+      }
+
+      /* Counter Container Styling */
+      .counter-container {
+        background: #e0e5ec;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+        margin-bottom: 20px;
+      }
+
+      .counter-display {
+        font-size: 4rem;
+        font-weight: bold;
+        text-align: center;
+        color: #333;
+      }
+
+      /* Controls Styling */
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .chevron-up,
+      .chevron-down {
+        background: #e0e5ec;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .chevron-up:hover,
+      .chevron-down:hover {
+        box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+      }
+
+      .chevron-up::before {
+        content: "▲";
+        font-size: 24px;
+        color: #333;
+      }
+
+      .chevron-down::before {
+        content: "▼";
+        font-size: 24px;
+        color: #333;
+      }
+
+      /* Footer Styling */
+      .app-footer {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: #666;
+        text-align: center;
+      }
+
+      .app-footer a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .app-footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="appBody" class="app-body">
+      <div class="header">
+        <select class="select header-element" id="steps">
+          <option value="1">+1</option>
+          <option value="2">+2</option>
+          <option value="5">+5</option>
+          <option value="10">+10</option>
+        </select>
+        <div class="header-element" id="edit">Edit</div>
+        <div class="header-element" id="resetter">Reset</div>
+      </div>
+      <div id="confettiContainer"></div>
+      <div id="central" class="central">
+        <div id="counterContainer" class="counter-container">
+          <div id="counterDisplay" class="counter-display">0</div>
+        </div>
+        <div id="controls" class="controls">
+          <div id="incrementor" class="chevron-up ripple"></div>
+          <div id="decrementor" class="chevron-down ripple"></div>
+        </div>
+      </div>
+    </div>
+    <div class="app-footer">
+      Developed by <a href="https://www.github.com/MinhajSiam" target="_blank">Minhajur Rahman Siam</a>
+    </div>
+
+    <script>
+      // JavaScript for Functionality
+      let count = 0;
+      let incrementValue = 1;
+
+      // DOM Elements
+      const counterDisplay = document.getElementById("counterDisplay");
+      const incrementor = document.getElementById("incrementor");
+      const decrementor = document.getElementById("decrementor");
+      const resetter = document.getElementById("resetter");
+      const editButton = document.getElementById("edit");
+      const stepsSelect = document.getElementById("steps");
+
+      // Update Counter Display
+      const updateCounter = () => {
+        counterDisplay.textContent = count;
+      };
+
+      // Increment Counter
+      incrementor.addEventListener("click", () => {
+        count += incrementValue;
+        updateCounter();
+      });
+
+      // Decrement Counter
+      decrementor.addEventListener("click", () => {
+        if (count - incrementValue >= 0) {
+          count -= incrementValue;
+          updateCounter();
+        }
+      });
+
+      // Reset Counter
+      resetter.addEventListener("click", () => {
+        count = 0;
+        updateCounter();
+      });
+
+      // Edit Counter Value
+      editButton.addEventListener("click", () => {
+        const newValue = prompt("Enter a new value:");
+        if (newValue !== null && !isNaN(newValue)) {
+          count = parseInt(newValue, 10);
+          updateCounter();
+        }
+      });
+
+      // Change Increment Value
+      stepsSelect.addEventListener("change", (e) => {
+        incrementValue = parseInt(e.target.value, 10);
+      });
+
+      // Initialize Counter
+      updateCounter();
+    </script>
+  </body>
+</html>
