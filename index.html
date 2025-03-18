@@ -48,12 +48,19 @@
       body {
         font-family: 'Heebo', sans-serif;
         background: #e0e5ec;
+        color: #333;
         display: flex;
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        color: #333;
         flex-direction: column;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      /* Dark Mode */
+      body.dark-mode {
+        background: #1a1a1a;
+        color: #f0f0f0;
       }
 
       /* App Body Container */
@@ -65,6 +72,12 @@
         text-align: center;
         max-width: 400px;
         width: 100%;
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+
+      body.dark-mode .app-body {
+        background: #2d2d2d;
+        box-shadow: 10px 10px 20px #1f1f1f, -10px -10px 20px #3b3b3b;
       }
 
       /* Header Styling */
@@ -84,8 +97,18 @@
         transition: all 0.3s ease;
       }
 
+      body.dark-mode .header-element {
+        background: #2d2d2d;
+        box-shadow: 5px 5px 10px #1f1f1f, -5px -5px 10px #3b3b3b;
+        color: #f0f0f0;
+      }
+
       .header-element:hover {
         box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+      }
+
+      body.dark-mode .header-element:hover {
+        box-shadow: inset 5px 5px 10px #1f1f1f, inset -5px -5px 10px #3b3b3b;
       }
 
       /* Select Dropdown Styling */
@@ -99,6 +122,13 @@
         color: #333;
         outline: none;
         cursor: pointer;
+        transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+      }
+
+      body.dark-mode .select {
+        background: #2d2d2d;
+        box-shadow: inset 5px 5px 10px #1f1f1f, inset -5px -5px 10px #3b3b3b;
+        color: #f0f0f0;
       }
 
       /* Counter Container Styling */
@@ -108,6 +138,12 @@
         padding: 20px;
         box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
         margin-bottom: 20px;
+        transition: background 0.3s, box-shadow 0.3s;
+      }
+
+      body.dark-mode .counter-container {
+        background: #2d2d2d;
+        box-shadow: inset 5px 5px 10px #1f1f1f, inset -5px -5px 10px #3b3b3b;
       }
 
       .counter-display {
@@ -115,6 +151,11 @@
         font-weight: bold;
         text-align: center;
         color: #333;
+        transition: color 0.3s;
+      }
+
+      body.dark-mode .counter-display {
+        color: #f0f0f0;
       }
 
       /* Controls Styling */
@@ -139,21 +180,43 @@
         transition: all 0.3s ease;
       }
 
+      body.dark-mode .chevron-up,
+      body.dark-mode .chevron-down {
+        background: #2d2d2d;
+        box-shadow: 5px 5px 10px #1f1f1f, -5px -5px 10px #3b3b3b;
+        color: #f0f0f0;
+      }
+
       .chevron-up:hover,
       .chevron-down:hover {
         box-shadow: inset 5px 5px 10px #a3b1c6, inset -5px -5px 10px #ffffff;
+      }
+
+      body.dark-mode .chevron-up:hover,
+      body.dark-mode .chevron-down:hover {
+        box-shadow: inset 5px 5px 10px #1f1f1f, inset -5px -5px 10px #3b3b3b;
       }
 
       .chevron-up::before {
         content: "▲";
         font-size: 24px;
         color: #333;
+        transition: color 0.3s;
+      }
+
+      body.dark-mode .chevron-up::before {
+        color: #f0f0f0;
       }
 
       .chevron-down::before {
         content: "▼";
         font-size: 24px;
         color: #333;
+        transition: color 0.3s;
+      }
+
+      body.dark-mode .chevron-down::before {
+        color: #f0f0f0;
       }
 
       /* Footer Styling */
@@ -162,20 +225,65 @@
         font-size: 0.9rem;
         color: #666;
         text-align: center;
+        transition: color 0.3s;
+      }
+
+      body.dark-mode .app-footer {
+        color: #888;
       }
 
       .app-footer a {
         color: #333;
         text-decoration: none;
         font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      body.dark-mode .app-footer a {
+        color: #f0f0f0;
       }
 
       .app-footer a:hover {
         text-decoration: underline;
       }
+
+      /* Dark Mode Toggle Button */
+      .dark-mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #e0e5ec;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 5px 5px 10px #a3b1c6, -5px -5px 10px #ffffff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      body.dark-mode .dark-mode-toggle {
+        background: #2d2d2d;
+        box-shadow: 5px 5px 10px #1f1f1f, -5px -5px 10px #3b3b3b;
+      }
+
+      .dark-mode-toggle::before {
+        content: "🌙";
+        font-size: 20px;
+        transition: content 0.3s;
+      }
+
+      body.dark-mode .dark-mode-toggle::before {
+        content: "☀️";
+      }
     </style>
   </head>
   <body>
+    <!-- Dark Mode Toggle Button -->
+    <div class="dark-mode-toggle" id="darkModeToggle"></div>
+
     <div id="appBody" class="app-body">
       <div class="header">
         <select class="select header-element" id="steps">
@@ -214,6 +322,8 @@
       const resetter = document.getElementById("resetter");
       const editButton = document.getElementById("edit");
       const stepsSelect = document.getElementById("steps");
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
 
       // Update Counter Display
       const updateCounter = () => {
@@ -252,6 +362,11 @@
       // Change Increment Value
       stepsSelect.addEventListener("change", (e) => {
         incrementValue = parseInt(e.target.value, 10);
+      });
+
+      // Dark Mode Toggle
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
       });
 
       // Initialize Counter
